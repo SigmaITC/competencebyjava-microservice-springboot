@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Appenders>
+        <!-- Add console logger here. Use name="default" because this makes it possible for us
+             to override when we want to generate splunk-logs -->
+        <Console name="default" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ISO8601} --- [%15.15t] %-40.40c{1.}: %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="se.sigma" level="debug" additivity="false">
+            <AppenderRef ref="default" />
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="default"/>
+        </Root>
+    </Loggers>
+</Configuration>
