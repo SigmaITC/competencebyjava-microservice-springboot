@@ -2,6 +2,8 @@ package se.sigma.microservice.springboot.data;
 
 import io.vavr.collection.List;
 import java.util.UUID;
+
+import io.vavr.control.Option;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,25 +15,28 @@ import se.sigma.microservice.springboot.model.User;
 public class UserStore {
 
   private List<User> users =
-      List.of(new User(UUID.randomUUID(), "Chris"), new User(UUID.randomUUID(), "Simon"));
+          List.of(
+                  new User(UUID.fromString("8390159a-87b3-4364-9202-8d0cd73ee06b"), "Chris"),
+                  new User(UUID.fromString("c95dc295-1aa7-4ec2-8007-afee43b31b16"), "Kevin"));
+
+  public Option<User> getUser(final UUID uuid) {
+    return this.users.find(user -> user.getId().equals(uuid));
+  }
 
   public User addUser(final User user) {
     this.users = this.users.append(user);
     return user;
   }
 
-  public User removeUser(final UUID uuid) {
-    final User user = unsafeGetUser(uuid);
-    this.users = this.users.remove(user);
+  public Option<User> removeUser(final UUID uuid) {
+    final var user = getUser(uuid);
+    this.users = user.map(x -> this.users.remove(x)).getOrElse(this.users);
     return user;
   }
 
-  public User updateUser(final UUID uuid, final User updatedUser) {
-    this.users = this.users.replace(unsafeGetUser(uuid), updatedUser);
-    return unsafeGetUser(uuid);
-  }
-
-  private User unsafeGetUser(final UUID uuid) {
-    return this.users.find(user -> user.getId().equals(uuid)).get();
+  public Option<User> updateUser(final UUID uuid, final User updatedUser) {
+    final var user = getUser(uuid);
+    this.users = user.map(x -> this.users.replace(x, updatedUser)).getOrElse(this.users);
+    return user;
   }
 }
