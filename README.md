@@ -10,13 +10,13 @@ Microservice implemented in Java using Spring Boot. Mainly for exploratory learn
 [![](https://codescene.io/projects/4252/status.svg)](https://codescene.io/projects/4252/jobs/latest-successful/results)
 
 ## Upcoming Workshops
-[Wiki - Retrospectives](https://github.com/SigmaITC/competencebyjava-microservice-springboot/wiki/Retrospectives)
+[Wiki - Road Map](https://github.com/SigmaITC/competencebyjava-microservice-springboot/wiki/Road-Map)
 
 ## Backlog
 [Wiki - Backlog](https://github.com/SigmaITC/competencebyjava-microservice-springboot/wiki/Backlog)
 
 ## Retrospectives
-[Wiki - Road Map](https://github.com/SigmaITC/competencebyjava-microservice-springboot/wiki/Road-Map)
+[Wiki - Retrospectives](https://github.com/SigmaITC/competencebyjava-microservice-springboot/wiki/Retrospectives)
 
 ## Other
 [JavaBySigma](https://sigmaitc.github.io/java-by-sigma)
