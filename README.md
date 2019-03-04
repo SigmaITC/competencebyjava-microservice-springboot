@@ -7,6 +7,7 @@ Microservice implemented in Java using Spring Boot. Mainly for exploratory learn
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d70c2a89631bf5667b84/test_coverage)](https://codeclimate.com/github/SigmaITC/competencebyjava-microservice-springboot/test_coverage)
 [![Known Vulnerabilities](https://snyk.io/test/github/SigmaITC/competencebyjava-microservice-springboot/badge.svg)](https://snyk.io/test/github/SigmaITC/competencebyjava-microservice-springboot)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SigmaITC_competencebyjava-microservice-springboot&metric=alert_status)](https://sonarcloud.io/dashboard?id=SigmaITC_competencebyjava-microservice-springboot)
+[![codebeat badge](https://codebeat.co/badges/d0997c97-d224-4021-adbe-abe856b2d3ae)](https://codebeat.co/projects/github-com-sigmaitc-competencebyjava-microservice-springboot-master-1445bbe3-f064-4a1f-93f9-f93e10559041)
 [![](https://codescene.io/projects/4252/status.svg)](https://codescene.io/projects/4252/jobs/latest-successful/results)
 
 ## Upcoming Workshops
