@@ -1,4 +1,4 @@
-package se.chriskevin.microservice.springboot;
+package se.sigma.microservice.springboot;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

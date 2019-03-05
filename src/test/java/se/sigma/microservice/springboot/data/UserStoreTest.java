@@ -1,13 +1,12 @@
-package se.chriskevin.microservice.springboot.data;
+package se.sigma.microservice.springboot.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static se.chriskevin.microservice.springboot.TestUtils.*;
 
 import io.vavr.collection.List;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import se.sigma.microservice.springboot.data.UserStore;
+import se.sigma.microservice.springboot.TestUtils;
 
 class UserStoreTest {
 
@@ -31,7 +30,7 @@ class UserStoreTest {
   @Test
   @DisplayName("Should return None")
   void verifyGetUserNone() {
-    final var actual = new UserStore().getUser(TEST_UUID);
+    final var actual = new UserStore().getUser(TestUtils.TEST_UUID);
 
     assertThat(actual).isEmpty();
   }
@@ -40,12 +39,12 @@ class UserStoreTest {
   @DisplayName("Should add the user and return it")
   void verifyAddUser() {
     final var store = new UserStore();
-    final var addedUser = store.addUser(TEST_USER);
+    final var addedUser = store.addUser(TestUtils.TEST_USER);
     final var users = store.getUsers();
 
-    assertThat(addedUser).isEqualTo(TEST_USER);
+    assertThat(addedUser).isEqualTo(TestUtils.TEST_USER);
     assertThat(users).hasSize(3);
-    assertThat(users).contains(TEST_USER);
+    assertThat(users).contains(TestUtils.TEST_USER);
   }
 
   @Test
@@ -64,7 +63,7 @@ class UserStoreTest {
   @DisplayName("Should not remove a non existing user")
   void verifyRemoveUserNonExisting() {
     final var store = new UserStore();
-    final var removedUser = store.removeUser(TEST_UUID);
+    final var removedUser = store.removeUser(TestUtils.TEST_UUID);
 
     assertThat(removedUser).isEmpty();
     assertThat(store.getUsers()).hasSize(2);
@@ -75,7 +74,7 @@ class UserStoreTest {
   void verifyUpdateUserExisting() {
     final var store = new UserStore();
     final var originalUser = store.getUsers().get(0);
-    final var userToUpdate = store.getUsers().get(0).withUsername(TEST_FIRST_NAME_STRING);
+    final var userToUpdate = store.getUsers().get(0).withUsername(TestUtils.TEST_FIRST_NAME_STRING);
     final var updatedUser = store.updateUser(userToUpdate.getId(), userToUpdate);
 
     assertThat(updatedUser.getOrNull()).isEqualTo(originalUser);
@@ -88,7 +87,7 @@ class UserStoreTest {
   void verifyUpdateUserNonExisting() {
     final var store = new UserStore();
     final var originalUsers = List.ofAll(store.getUsers());
-    final var userToUpdate = TEST_USER;
+    final var userToUpdate = TestUtils.TEST_USER;
     final var updatedUser = store.updateUser(userToUpdate.getId(), userToUpdate);
 
     assertThat(updatedUser).isEmpty();

@@ -1,4 +1,4 @@
-package se.chriskevin.microservice.springboot;
+package se.sigma.microservice.springboot;
 
 import java.util.UUID;
 import se.sigma.microservice.springboot.model.User;

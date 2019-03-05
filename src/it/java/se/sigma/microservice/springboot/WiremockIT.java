@@ -1,4 +1,4 @@
-package se.chriskevin.microservice.springboot;
+package se.sigma.microservice.springboot;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.Test;

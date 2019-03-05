@@ -1,4 +1,4 @@
-package se.chriskevin.microservice.springboot;
+package se.sigma.microservice.springboot;
 
 import static io.specto.hoverfly.junit.core.SimulationSource.dsl;
 import static io.specto.hoverfly.junit.dsl.HoverflyDsl.service;

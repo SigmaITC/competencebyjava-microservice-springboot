@@ -1,4 +1,4 @@
-package se.chriskevin.microservice.springboot.stepdef;
+package se.sigma.microservice.springboot.stepdef;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
