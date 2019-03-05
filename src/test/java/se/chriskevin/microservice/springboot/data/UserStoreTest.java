@@ -1,46 +1,98 @@
 package se.chriskevin.microservice.springboot.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static se.chriskevin.microservice.springboot.TestUtils.*;
 
 import io.vavr.collection.List;
-import io.vavr.control.Option;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import se.sigma.microservice.springboot.data.UserStore;
-import se.sigma.microservice.springboot.model.User;
 
 class UserStoreTest {
 
   @Test
   @DisplayName("Should return a list of users")
-  void verifyGetUser() {
-    final List<User> actual = new UserStore().getUsers();
+  void verifyGetUsers() {
+    final var actual = new UserStore().getUsers();
 
-    assertEquals(2, actual.size());
+    assertThat(actual).hasSize(2);
+  }
+
+  @Test
+  @DisplayName("Should return Some(User")
+  void verifyGetUser() {
+    final var store = new UserStore();
+    final var actual = store.getUser(UUID.fromString("8390159a-87b3-4364-9202-8d0cd73ee06b"));
+
+    assertThat(actual.get()).isEqualTo(store.getUsers().head());
+  }
+
+  @Test
+  @DisplayName("Should return None")
+  void verifyGetUserNone() {
+    final var actual = new UserStore().getUser(TEST_UUID);
+
+    assertThat(actual).isEmpty();
+  }
+
+  @Test
+  @DisplayName("Should add the user and return it")
+  void verifyAddUser() {
+    final var store = new UserStore();
+    final var addedUser = store.addUser(TEST_USER);
+    final var users = store.getUsers();
+
+    assertThat(addedUser).isEqualTo(TEST_USER);
+    assertThat(users).hasSize(3);
+    assertThat(users).contains(TEST_USER);
   }
 
   @Test
   @DisplayName("Should remove an existing user")
   void verifyRemoveUserExisting() {
-    final UserStore store = new UserStore();
-    final User userToRemove = store.getUsers().get(0);
-    final Option<User> removedUser = store.removeUser(userToRemove.getId());
+    final var store = new UserStore();
+    final var userToRemove = store.getUsers().get(0);
+    final var removedUser = store.removeUser(userToRemove.getId());
 
-    assertEquals(removedUser.getOrNull(), userToRemove);
-    assertEquals(store.getUsers().size(), 1);
-    assertTrue(store.getUser(userToRemove.getId()).isEmpty());
+    assertThat(userToRemove).isEqualTo(removedUser.getOrNull());
+    assertThat(store.getUsers()).hasSize(1);
+    assertThat(store.getUser(userToRemove.getId())).isEmpty();
   }
 
   @Test
   @DisplayName("Should not remove a non existing user")
   void verifyRemoveUserNonExisting() {
-    final UserStore store = new UserStore();
-    final User userToRemove = new User(UUID.randomUUID(), "Fail");
-    final Option<User> removedUser = store.removeUser(userToRemove.getId());
+    final var store = new UserStore();
+    final var removedUser = store.removeUser(TEST_UUID);
 
-    assertTrue(removedUser.isEmpty());
-    assertEquals(store.getUsers().size(), 2);
+    assertThat(removedUser).isEmpty();
+    assertThat(store.getUsers()).hasSize(2);
+  }
+
+  @Test
+  @DisplayName("Should update an existing user")
+  void verifyUpdateUserExisting() {
+    final var store = new UserStore();
+    final var originalUser = store.getUsers().get(0);
+    final var userToUpdate = store.getUsers().get(0).withUsername(TEST_FIRST_NAME_STRING);
+    final var updatedUser = store.updateUser(userToUpdate.getId(), userToUpdate);
+
+    assertThat(updatedUser.getOrNull()).isEqualTo(originalUser);
+    assertThat(store.getUsers()).hasSize(2);
+    assertThat(store.getUser(userToUpdate.getId()).getOrNull()).isEqualTo(userToUpdate);
+  }
+
+  @Test
+  @DisplayName("Should not update a non existing user")
+  void verifyUpdateUserNonExisting() {
+    final var store = new UserStore();
+    final var originalUsers = List.ofAll(store.getUsers());
+    final var userToUpdate = TEST_USER;
+    final var updatedUser = store.updateUser(userToUpdate.getId(), userToUpdate);
+
+    assertThat(updatedUser).isEmpty();
+    assertThat(store.getUsers()).hasSize(2);
+    assertThat(store.getUsers()).isEqualTo(originalUsers);
   }
 }

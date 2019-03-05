@@ -33,8 +33,8 @@ public final class UserService {
 
   public Option<User> updateUser(final UUID uuid, final WritableUserDetails userDetails) {
     return userStore
-            .getUser(uuid)
-            .map(user -> user.withUsername(userDetails.getUsername()))
-            .flatMap(user -> userStore.updateUser(uuid, user));
+        .getUser(uuid)
+        .map(user -> user.withUsername(userDetails.getUsername()))
+        .flatMap(user -> userStore.updateUser(uuid, user));
   }
 }

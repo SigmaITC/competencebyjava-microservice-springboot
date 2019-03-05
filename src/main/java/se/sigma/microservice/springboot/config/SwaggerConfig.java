@@ -37,10 +37,9 @@ public class SwaggerConfig {
         "An example Spring Boot microservice",
         "0.1",
         "",
-        new Contact(
-            "Chris Sundberg", "https://github.com/chriskevin", "chris.sundberg@protonmail.com"),
+        new Contact("Chris Sundberg", "https://github.com/SigmaITC", "chris.sundberg@sigma.se"),
         "MIT",
-        "https://github.com/chriskevin/microservice-java-spring-boot/blob/master/LICENSE",
+        "https://github.com/SigmaITC/competencebyjava-microservice-springboot/blob/master/LICENSE",
         Collections.emptyList());
   }
 }
