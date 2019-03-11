@@ -20,24 +20,24 @@ public final class UserStepDefs implements En {
   public UserStepDefs() {
 
     Given(
-        "^REST URL <\"(" + REGEX_PATH + ")\">$",
+        "^REST URL <\"(.*)\">$",
         (final String path) -> {
+          System.out.println("PATH=" + path);
+          RestAssured.reset();
           RestAssured.baseURI = LOCALHOST;
           RestAssured.basePath = path;
         });
 
-    When("^GET request is sent$", () -> response = given().contentType("application/json").get());
+    When("^GET request is sent$", () -> response = given().when().get());
 
     Then(
         "^response status should be <(" + REGEX_HTTP_STATUS_CODE + ")>",
-        (final Integer expected) -> {
-          assertThat(response.getStatusCode()).isEqualTo(expected);
-        });
+        (final Integer expected) -> assertThat(response.getStatusCode()).isEqualTo(expected));
 
     Then(
         "^response body should match$",
-        (final String expected) -> {
-          assertThat(response.getBody().print()).isEqualTo(expected);
-        });
+        (final String expected) ->
+            assertThat(response.getBody().prettyPrint().replaceAll("\\s+", ""))
+                .isEqualTo(expected.replaceAll("\\s", "")));
   }
 }

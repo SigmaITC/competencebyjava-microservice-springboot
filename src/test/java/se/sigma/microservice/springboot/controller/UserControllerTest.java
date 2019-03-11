@@ -94,7 +94,8 @@ class UserControllerTest {
     when(mockUserService.addUser(any(WritableUserDetails.class))).thenReturn(expected);
     final var userService = new UserController(mockUserService);
 
-    final var actual = userService.addUser(new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
+    final var actual =
+        userService.addUser(new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
 
     assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(actual.getBody()).isEqualTo(expected);
@@ -111,7 +112,8 @@ class UserControllerTest {
     final var userService = new UserController(mockUserService);
 
     final var actual =
-        userService.updateUser(TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
+        userService.updateUser(
+            TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
 
     assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(actual.getBody()).isEqualTo(expected.getOrNull());
@@ -128,7 +130,8 @@ class UserControllerTest {
     final var userService = new UserController(mockUserService);
 
     final var actual =
-        userService.updateUser(TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
+        userService.updateUser(
+            TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING));
 
     assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }

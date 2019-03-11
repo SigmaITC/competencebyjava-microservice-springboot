@@ -71,7 +71,9 @@ class UserServiceTest {
     when(mockUserStore.updateUser(any(UUID.class), any(User.class))).thenReturn(expected);
     final var userService = new UserService(mockUserStore);
 
-    assertThat(userService.updateUser(TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING)))
+    assertThat(
+            userService.updateUser(
+                TestUtils.TEST_UUID, new WritableUserDetails(TestUtils.TEST_FIRST_NAME_STRING)))
         .isEqualTo(expected);
   }
 }
