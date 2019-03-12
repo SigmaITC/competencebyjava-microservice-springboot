@@ -27,7 +27,8 @@ public final class UserController {
   @ApiResponses(
     value = {
       @ApiResponse(code = 404, message = "No users exist", response = ApiError.class),
-      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
+      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class),
+      @ApiResponse(code = 200, message = "Fetch all user success")
     }
   )
   public ResponseEntity<List<User>> getUsers() {
@@ -40,7 +41,8 @@ public final class UserController {
     value = {
       @ApiResponse(code = 400, message = "Invalid input", response = ApiError.class),
       @ApiResponse(code = 404, message = "No user found with given ID", response = ApiError.class),
-      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
+      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class),
+      @ApiResponse(code = 200, message = "Get user success")
     }
   )
   public ResponseEntity<User> getUser(final @ApiParam(value = "A UUID") @PathVariable UUID id) {
@@ -55,7 +57,8 @@ public final class UserController {
     value = {
       @ApiResponse(code = 400, message = "Invalid input", response = ApiError.class),
       @ApiResponse(code = 404, message = "No user found with given ID", response = ApiError.class),
-      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
+      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class),
+      @ApiResponse(code = 200, message = "Delete user success")
     }
   )
   @DeleteMapping(value = "/users/{id}")
@@ -70,7 +73,8 @@ public final class UserController {
   @ApiResponses(
     value = {
       @ApiResponse(code = 400, message = "Invalid input", response = ApiError.class),
-      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
+      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class),
+      @ApiResponse(code = 200, message = "Add user success")
     }
   )
   @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -83,7 +87,8 @@ public final class UserController {
     value = {
       @ApiResponse(code = 400, message = "Invalid input", response = ApiError.class),
       @ApiResponse(code = 404, message = "No user found with given ID", response = ApiError.class),
-      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
+      @ApiResponse(code = 500, message = "Technical error", response = ApiError.class),
+      @ApiResponse(code = 200, message = "Update user success")
     }
   )
   @PutMapping(value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
