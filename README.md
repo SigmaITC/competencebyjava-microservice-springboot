@@ -28,6 +28,7 @@ We try to use the latest versions of all technologies so that we learn the nitty
 ## System Requirements
 Java 11 is required to build the project, [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html). You also need to have the [IntelliJ Lombok Plugin](https://plugins.jetbrains.com/plugin/6317-lombok-plugin) or [Setup Eclipse](https://projectlombok.org/setup/eclipse) for annotation preprocessing.
 
+Note: Remember to check that your IDE is using language level 11 as well (Project and Modules).
 ## Useful Commands
 * Run unit tests `mvn test`
 * Run integration tests `mvn verify`
