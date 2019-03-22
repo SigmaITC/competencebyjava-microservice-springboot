@@ -23,13 +23,17 @@
 
         <!-- Dependencies versions -->
         <apache-commons.version>3.8</apache-commons.version>
+        <hazelcast.version>3.11.2</hazelcast.version>
+        <hibernate.version>5.2.4.Final</hibernate.version>
         <lombok.version>1.18.4</lombok.version>
+        <postgresql.version>42.2.5</postgresql.version>
         <vavr.version>0.10.0</vavr.version>
         <springfox.version>2.9.2</springfox.version>
 
         <!-- Test dependencies versions -->
         <assertj.version>3.11.1</assertj.version>
         <cucumber.version>4.2.2</cucumber.version>
+        <h2.version>1.4.192</h2.version>
         <hoverfly.version>0.11.2</hoverfly.version>
         <junit-jupiter.version>5.4.0-M1</junit-jupiter.version>
         <junit-platform.version>1.3.2</junit-platform.version>
@@ -45,6 +49,7 @@
         <cobertura.version>2.7</cobertura.version>
         <cucumber-jvm-parallel-plugin.version>5.0.0</cucumber-jvm-parallel-plugin.version>
         <failsafe.version>3.0.0-M3</failsafe.version>
+        <flyway-plugin.version>5.2.4</flyway-plugin.version>
         <java.version>1.8</java.version>
         <spotbugs.version>3.1.10</spotbugs.version>
         <spotless.version>1.17.0</spotless.version>
@@ -52,6 +57,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <version>${hazelcast.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+            <version>${hazelcast.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -68,13 +83,37 @@
             <version>${vavr.version}</version>
         </dependency>
         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache-commons.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -111,6 +150,12 @@
             <groupId>au.com.dius</groupId>
             <artifactId>pact-jvm-consumer-java8_2.12</artifactId>
             <version>${pact.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
@@ -197,6 +242,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>ru.lanwen.wiremock</groupId>
             <artifactId>wiremock-junit5</artifactId>
             <version>${wiremock-junit5.version}</version>
@@ -235,6 +285,28 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway-plugin.version}</version>
+                <configuration>
+                    <!-- H2 -->
+                    <url>jdbc:h2:file:./target/users</url>
+                    <user>sa</user>
+
+                    <!-- Postgres -->
+                    <!--<url>jdbc:postgresql://localhost:5432/user</url>-->
+                    <!--<user>postgres</user>-->
+                    <!--<password>sample</password>-->
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>${h2.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

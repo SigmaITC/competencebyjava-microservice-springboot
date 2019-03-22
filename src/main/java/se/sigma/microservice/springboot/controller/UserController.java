@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.vavr.collection.List;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,14 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.sigma.microservice.springboot.exception.ApiError;
 import se.sigma.microservice.springboot.model.User;
-import se.sigma.microservice.springboot.model.WritableUserDetails;
-import se.sigma.microservice.springboot.services.UserService;
+import se.sigma.microservice.springboot.services.RepositoryUserService;
 
 @RestController
 @AllArgsConstructor
 public final class UserController {
 
-  private final UserService userService;
+  private final RepositoryUserService userService;
 
   @GetMapping(value = "/users")
   @ApiOperation(value = "Fetches all users")
@@ -43,7 +41,7 @@ public final class UserController {
       @ApiResponse(code = 500, message = "Technical error", response = ApiError.class)
     }
   )
-  public ResponseEntity<User> getUser(final @ApiParam(value = "A UUID") @PathVariable UUID id) {
+  public ResponseEntity<User> getUser(final @ApiParam(value = "An ID") @PathVariable Integer id) {
     return userService
         .getUser(id)
         .map(ResponseEntity::ok)
@@ -59,7 +57,7 @@ public final class UserController {
     }
   )
   @DeleteMapping(value = "/users/{id}")
-  public ResponseEntity deleteUser(final @ApiParam(value = "A UUID") @PathVariable UUID id) {
+  public ResponseEntity deleteUser(final @ApiParam(value = "An ID") @PathVariable Integer id) {
     return userService
         .deleteUser(id)
         .map(ResponseEntity::ok)
@@ -74,8 +72,8 @@ public final class UserController {
     }
   )
   @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> addUser(final @RequestBody WritableUserDetails userDetails) {
-    return new ResponseEntity<>(userService.addUser(userDetails), HttpStatus.OK);
+  public ResponseEntity<User> addUser(final @RequestBody User user) {
+    return new ResponseEntity<>(userService.addUser(user), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Updates a specific user")
@@ -88,10 +86,9 @@ public final class UserController {
   )
   @PutMapping(value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> updateUser(
-      final @ApiParam(value = "A UUID") @PathVariable UUID id,
-      final @RequestBody WritableUserDetails userDetails) {
+      final @ApiParam(value = "An ID") @PathVariable Integer id, final @RequestBody User user) {
     return userService
-        .updateUser(id, userDetails)
+        .updateUser(id, user)
         .map(ResponseEntity::ok)
         .getOrElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }

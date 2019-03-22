@@ -1,14 +1,13 @@
 package se.sigma.microservice.springboot.model;
 
 import io.swagger.annotations.ApiModelProperty;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.ToString;
+import javax.persistence.*;
+import lombok.*;
 import lombok.experimental.Wither;
 
+@Entity
+@Table(name = "user")
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 @Wither
@@ -17,10 +16,12 @@ import lombok.experimental.Wither;
 public class User {
 
   @ApiModelProperty(value = "UUID that identifies a unique user")
-  @NonNull
-  private final UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private final Integer id;
 
   @ApiModelProperty(value = "Alias for the users real name")
   @NonNull
-  private final String username;
+  @Column(name = "name")
+  private final String name;
 }

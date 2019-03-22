@@ -2,39 +2,17 @@ package se.sigma.microservice.springboot.services;
 
 import io.vavr.collection.List;
 import io.vavr.control.Option;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import se.sigma.microservice.springboot.data.UserStore;
 import se.sigma.microservice.springboot.model.User;
-import se.sigma.microservice.springboot.model.WritableUserDetails;
 
-@Service
-@AllArgsConstructor
-public final class UserService {
+public interface UserService {
 
-  private final UserStore userStore;
+  List<User> getUsers();
 
-  public List<User> getUsers() {
-    return userStore.getUsers();
-  }
+  Option<User> getUser(final Integer id);
 
-  public Option<User> getUser(final UUID uuid) {
-    return userStore.getUser(uuid);
-  }
+  Option<User> deleteUser(final Integer id);
 
-  public Option<User> deleteUser(final UUID uuid) {
-    return userStore.removeUser(uuid);
-  }
+  User addUser(final User user);
 
-  public User addUser(final WritableUserDetails userDetails) {
-    return userStore.addUser(new User(UUID.randomUUID(), userDetails.getUsername()));
-  }
-
-  public Option<User> updateUser(final UUID uuid, final WritableUserDetails userDetails) {
-    return userStore
-        .getUser(uuid)
-        .map(user -> user.withUsername(userDetails.getUsername()))
-        .flatMap(user -> userStore.updateUser(uuid, user));
-  }
+  Option<User> updateUser(final Integer id, final User user);
 }
