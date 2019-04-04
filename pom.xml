@@ -45,6 +45,7 @@
         <cobertura.version>2.7</cobertura.version>
         <cucumber-jvm-parallel-plugin.version>5.0.0</cucumber-jvm-parallel-plugin.version>
         <failsafe.version>3.0.0-M3</failsafe.version>
+        <jacoco-plugin.version>0.8.3</jacoco-plugin.version>
         <java.version>1.8</java.version>
         <spotbugs.version>3.1.10</spotbugs.version>
         <spotless.version>1.17.0</spotless.version>
@@ -306,6 +307,48 @@
                             </resources>
                         </configuration>
                     </execution>
+                </executions>
+            </plugin>
+
+            <!-- Code Coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <!--<execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.5</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>-->
                 </executions>
             </plugin>
 
