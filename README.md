@@ -1,4 +1,4 @@
-# Sigma ITC CompetenceByJava - Spring Boot Microservice ![GitHub](https://img.shields.io/github/license/SIgmaITC/competencebyjava-microservice-springboot.svg) [![Gitter](https://badges.gitter.im/SigmaITC/CompetenceByJava.svg)](https://gitter.im/SigmaITC/CompetenceByJava?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+# Sigma ITC CompetenceByJava - Spring Boot Microservice [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/SigmaITC/competencebyjava-microservice-springboot/master/LICENSE) [![Gitter](https://badges.gitter.im/SigmaITC/CompetenceByJava.svg)](https://gitter.im/SigmaITC/CompetenceByJava?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 Microservice implemented in Java using Spring Boot. Mainly for exploratory learning.
 We try to use the latest versions of all technologies so that we learn the nitty gritty stuff to make them work.
 
