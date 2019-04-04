@@ -34,7 +34,7 @@
         <junit-jupiter.version>5.4.0-M1</junit-jupiter.version>
         <junit-platform.version>1.3.2</junit-platform.version>
         <mockito.version>2.24.5</mockito.version>
-        <pact.version>3.5.20</pact.version>
+        <pact.version>3.5.22</pact.version>
         <pitest.version>1.4.5</pitest.version>
         <rest-assured.version>3.3.0</rest-assured.version>
         <wiremock.version>2.21.0</wiremock.version>
