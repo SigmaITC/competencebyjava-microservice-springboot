@@ -2,6 +2,8 @@
 Microservice implemented in Java using Spring Boot. Mainly for exploratory learning.
 We try to use the latest versions of all technologies so that we learn the nitty gritty stuff to make them work.
 
+There is also a front end application for this service [here](https://github.com/SigmaITC/competencebyjava-front-end).
+
 ## Project Health
 [![buddy pipeline](https://app.buddy.works/chrissundberg/competencebyjava-microservice-springboot/pipelines/pipeline/175356/badge.svg?token=a9753c3d3316f788308b9d5ddb520bcd6037071ea89e96048ab22e3a15239742 "buddy pipeline")](https://app.buddy.works/chrissundberg/competencebyjava-microservice-springboot/pipelines/pipeline/175356)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d70c2a89631bf5667b84/maintainability)](https://codeclimate.com/github/SigmaITC/competencebyjava-microservice-springboot/maintainability)
