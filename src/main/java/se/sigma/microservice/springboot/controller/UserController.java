@@ -22,6 +22,7 @@ public final class UserController {
 
   private final UserService userService;
 
+  @CrossOrigin(origins = "http://localhost:8081")
   @GetMapping(value = "/users")
   @ApiOperation(value = "Fetches all users")
   @ApiResponses(
@@ -35,6 +36,7 @@ public final class UserController {
     return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
   }
 
+  @CrossOrigin(origins = "http://localhost:8081")
   @GetMapping(value = "/users/{id}")
   @ApiOperation(value = "Fetches a specific user")
   @ApiResponses(
@@ -52,6 +54,7 @@ public final class UserController {
         .getOrElse(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
+  @CrossOrigin(origins = "http://localhost:8081")
   @ApiOperation(value = "Deletes a specific user")
   @ApiResponses(
     value = {
@@ -69,6 +72,7 @@ public final class UserController {
         .getOrElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
+  @CrossOrigin(origins = "http://localhost:8081")
   @ApiOperation(value = "Adds a new user")
   @ApiResponses(
     value = {
@@ -82,6 +86,7 @@ public final class UserController {
     return new ResponseEntity<>(userService.addUser(userDetails), HttpStatus.OK);
   }
 
+  @CrossOrigin(origins = "http://localhost:8081")
   @ApiOperation(value = "Updates a specific user")
   @ApiResponses(
     value = {
